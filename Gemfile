@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'pg', group: :production
+gem 'rails_12factor', group: :production
+
+
 gem 'devise'     # 회원가입 및 인증
 gem 'rolify'     # role 관리
 gem 'authority'  # 권한설정
@@ -13,7 +17,7 @@ gem 'simple_form', '3.1.0'
 
 gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', group: :development
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
