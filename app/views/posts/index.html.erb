@@ -1,0 +1,37 @@
+
+
+<form action='posts' method='get'>
+  <div class="form-group">
+    <label for="exampleInputPassword1">태그 검색</label>
+    <input name="tag" type="search" class="form-control" id="exampleInputPassword1" placeholder="tag search"></br>
+  <button type="submit" class="btn btn-default">검색</button>
+</form>
+
+<h1><%= link_to '후기 쓰기', new_post_path, class: 'btn btn-default' %></h1> 
+
+
+<h1>후기</h1>
+    <% @posts.each do |post| %>
+    <div class="well" style='word-break:break-all'>
+      
+        <%= post.content %>
+        <br><br>
+            <% if post.tag_list.size > 0 %>
+              <div class='tag_list'><%=tag_icons(post.tag_list) %></div>
+            <% end %>
+        
+        <%= post.user.present? ? post.user.email : "n/a" %>, <%= time_ago_in_words(post.created_at) %> ago
+        <br><br>
+        <!--<%= link_to 'Show', post %>-->
+        <% if user_signed_in? %>
+        <%= link_to '수정', edit_post_path(post), class: 'btn btn-default' if post.updatable_by? current_user %>
+        <%= link_to '삭제', post, method: :delete, data: { confirm: '삭제하실건가요?' }, class: 'btn btn-default' if post.deletable_by? current_user %>
+        
+       
+        <% end %>
+        
+      </div>
+    <% end %>
+
+
+<br>

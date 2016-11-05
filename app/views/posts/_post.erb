@@ -1,0 +1,6 @@
+<li>
+  <span class='label label-default'><%= post.try(:content) %></span>
+  <%= link_to post.content, [post] %>
+  <%= time_ago_in_words(post.created_at) %> ago
+  <%= tag_icons(post.tag_list) %>
+</li>

@@ -1,0 +1,9 @@
+<h1>후기 작성</h1>
+<h3>가게분위기, 어려운정도, 하는 일, 장,단점을 적어주세요</h3>
+<p style='text-align:right;'>
+      created by <%= current_user.email %>, Current Time : <%= Time.now %>
+    </p>
+  
+<%= render 'form' %>
+<br>
+<%= link_to '뒤로 가기', posts_path, class: 'btn btn-default' %>
