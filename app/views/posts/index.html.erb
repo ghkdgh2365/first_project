@@ -19,7 +19,14 @@
             <% if post.tag_list.size > 0 %>
               <strong> <div class='tag_list'>태그 | <%=tag_icons(post.tag_list) %></div></strong>
             <% end %>
-        
+            <% post.comments.each do |c| %>
+              <div style='white-space: pre'><%= c.body %></div>
+            <% end %>
+        <form action='/posts/reply_create' method='post' style='margin-top:20px;'>
+          <input type='hidden' value='<%=post.id%>' name='id_of_post'>
+          <textarea class="form-control" rows="3" id='content' name="xylitol"></textarea>
+          <button type="submit" class="btn btn-default">제출</button>
+        </form>
         <%= post.user.present? ? post.user.name : "n/a" %>
         <%= time_ago_in_words(post.created_at) %> ago
         <br><br>

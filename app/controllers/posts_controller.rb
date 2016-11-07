@@ -17,6 +17,15 @@ class PostsController < ApplicationController
   def show
   end
 
+  def reply_create
+    
+    reply = Comment.new
+    reply.body = params[:xylitol]
+    reply.post_id = params[:id_of_post]
+    reply.save
+    
+    redirect_to :back
+  end
   # GET /posts/new
   def new
     @post = Post.new
