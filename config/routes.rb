@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
   root 'posts#index'
   post 'posts/reply_create'
+  get 'comment/reply_destroy/:comment_id' => 'posts#reply_destroy'
+
   resources :posts do
     resources :comments
   end

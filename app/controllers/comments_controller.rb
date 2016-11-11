@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, except: [ :index, :show ]
   before_action :set_post
   before_action :set_comment, only: :destroy
 
@@ -11,6 +12,10 @@ class CommentsController < ApplicationController
     @comment.destroy
   end
 
+  def reply_destroy
+    authorize_action_for @comment
+    @comment.destroy
+  end
   private
 
   def set_post

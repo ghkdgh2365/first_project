@@ -36,8 +36,8 @@
         <h4>댓글</h4>
             
             <% post.comments.each do |c| %>
-              <div style='white-space: pre'><%= c.body %></div>
-              <br>
+              <div style='white-space: pre; margin-bottom:5px;'><%= c.body %>      <%= time_ago_in_words(c.created_at) %> ago
+              </div>
             <% end %>
             
           <form action='/posts/reply_create' method='post' style='margin-top:1px;'>

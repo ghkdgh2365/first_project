@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_reply, only: [:reply_destroy]
   # GET /posts
   # GET /posts.json
   def index
@@ -18,11 +18,17 @@ class PostsController < ApplicationController
   end
 
   def reply_create
+    @reply = Comment.new
+    @reply.body = params[:xylitol]
+    @reply.post_id = params[:id_of_post]
+    @reply.save
     
-    reply = Comment.new
-    reply.body = params[:xylitol]
-    reply.post_id = params[:id_of_post]
-    reply.save
+    redirect_to "/"
+  end
+  
+  def reply_destroy
+    @reply = Comment.find(params[:comment_id])
+    @reply.destroy
     
     redirect_to :back
   end
@@ -76,5 +82,9 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:content, :tag_list_fixed)
+    end
+    
+    def set_reply
+      @reply = Comment.find(params[:comment_id])
     end
 end
