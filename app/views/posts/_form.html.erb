@@ -3,15 +3,17 @@
 
 
   <div class="form-inputs">
-    <%= f.input :content,  input_html: {  :value =>'1. 가게분위기 :
+    <%= f.input :content, label:'후기 내용', input_html: {  :value =>'1. 가게분위기 :
 
 2. 어려움정도 :
 
 3. 하는 일 : 
 
-4. 주의사항 및 TIPS : ', rows: 10 } %>
+4. 주의사항 및 TIPS : 
 
-    <%= f.input :tag_list_fixed, placeholder: '하나 이상의 태그는 콤마(,)로 구분하여 입력하세요.' %>
+5. 근무기간 : ', rows: 10 } %>
+
+    <%= f.input :tag_list_fixed , label:'정확한 지점명,지역 등을 적어주세요(Ex, 파리바게트 역삼플래티넘점, 서울, 강남)', placeholder: '하나 이상의 태그는 콤마(,)로 구분하여 입력하세요.' %>
   </div>
   
    <div class="form-actions">
