@@ -12,11 +12,11 @@
 
 <h1>후기</h1>
     <% @posts.each do |post| %>
-    <div class="well" style='word-break:break-all;'>
+      <div class="well" style='word-break:break-all;'>
       
        
             
-        <div style='white-space: pre'><%= post.content %></div>
+        <div style= 'white-space: pre-wrap;'><%= post.content %></div>
         <br>
            <% if post.tag_list.size > 0 %>
               <strong><p> <div class='tag_list'>태그 | <%=tag_icons(post.tag_list) %></div></p></strong>
