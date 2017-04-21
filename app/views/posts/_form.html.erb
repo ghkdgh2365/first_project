@@ -1,7 +1,9 @@
 <%= simple_form_for(@post) do |f| %>
   <%= f.error_notification %>
-
-
+  <div class="form-inputs">
+  <%= f.input :title, label:'제목'%>
+  
+  </div>
   <div class="form-inputs">
     <%= f.input :content, label:'후기 내용', input_html: {  :value =>'1. 가게분위기 :
 

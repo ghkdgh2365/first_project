@@ -15,7 +15,7 @@
       <div class="well" style='word-break:break-all;'>
       
        
-            
+        <div style= 'white-space: pre-wrap;'><h3 style="margin-top:0px;"><%= post.title %></h3></div>
         <div style= 'white-space: pre-wrap;'><%= post.content %></div>
         <br>
            <% if post.tag_list.size > 0 %>
@@ -29,14 +29,14 @@
         <% if user_signed_in? %>
         <%= link_to '수정', edit_post_path(post), class: 'btn btn-default' if post.updatable_by? current_user %>
         <%= link_to '삭제', post, method: :delete, data: { confirm: '삭제하실건가요?' }, class: 'btn btn-default' if post.deletable_by? current_user %>
-        
+        <!--<button type="button" class="fshare" data-id="<%= post.id %>">페북 share</button>-->
        
         <% end %>
         <br><br>
         <h4>댓글</h4>
             
             <% post.comments.each do |c| %>
-              <div style='white-space: pre; margin-bottom:5px;'><%= c.body %>      <%= time_ago_in_words(c.created_at) %> ago
+              <div style='white-space: pre; margin-bottom:5px;'><%= c.body %> <a href="/posts/<%= post.id %>/reply_edit/<%=c.id%>">수정</a> <a href="/posts/<%= post.id %>/reply_destroy/<%=c.id%>">삭제</a>  <%= time_ago_in_words(c.created_at) %> ago 
               </div>
             <% end %>
             
@@ -46,9 +46,8 @@
             <br>
             <button type="submit" class="btn btn-default">댓글 달기</button>
           </form>
-            
-        
-        
+          
+          
       </div>
     <% end %>
 
