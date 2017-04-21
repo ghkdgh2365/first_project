@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get 'posts/:id/reply_destroy/:comment_id' => 'posts#reply_destroy'
   get 'posts/:id/reply_edit/:comment_id' => 'posts#reply_edit'
   post 'posts/:id/reply_update/:comment_id' => 'posts#reply_update'
+  get 'posts/:id/reply_list' => 'posts#reply_list'
+  resources :comments do
+    resources :comments
+  end
   resources :posts do
     resources :comments
   end

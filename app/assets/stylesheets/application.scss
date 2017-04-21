@@ -5,8 +5,10 @@ $navbar-default-link-color: gray;
 $navbar-default-link-active-color: $light-sky;
 $navbar-default-link-hover-color: white;
 $navbar-default-link-hover-bg: black;
+$enable-flex: true;
 
 @import 'bootstrap';
 @import 'comments';
 @import "posts";
+
 body { padding-top: 60px; }

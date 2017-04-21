@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :set_reply, only: [:reply_destroy, :reply_edit, :reply_update]
+  before_action :set_reply, only: [:reply_destroy, :reply_edit, :reply_update, :reply_edit, :reply_update]
   # GET /posts
   # GET /posts.json
   def index
@@ -23,27 +23,34 @@ class PostsController < ApplicationController
     @reply.post_id = params[:id_of_post]
     @reply.save
     
-    redirect_to "/"
-  end
-  
-  def reply_destroy
-    @reply = Comment.find(params[:comment_id])
-    @reply.destroy
-    
     redirect_to :back
   end
   
+  def reply_destroy
+    authorize_action_for @reply
+      @reply = Comment.find(params[:comment_id])
+      @reply.destroy
+      
+      redirect_to :back
+  end
+  
   def reply_edit
-    @post = Post.find(params[:id])
-    @reply = Comment.find(params[:comment_id])
+    authorize_action_for @reply
+      @post = Post.find(params[:id])
+      @reply = Comment.find(params[:comment_id])
   end
   
   def reply_update
+    authorize_action_for @reply
       @reply = Comment.find(params[:comment_id])
       @reply.body = params[:xylitol]
       @reply.save
       
       redirect_to :back
+  end
+  
+  def reply_list
+    @post = Post.find(params[:id])
   end
   # GET /posts/new
   def new

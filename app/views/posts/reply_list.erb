@@ -1,0 +1,27 @@
+<h3><%=@post.title%></h3>
+<hr/>
+<h4>댓글</h4>
+<form action='/posts/reply_create' method='post' style='margin-top:1px;'>
+    <input type='hidden' value='<%=@post.id%>' name='id_of_post'>
+    <textarea class="form-control" rows="3" id='content' name="xylitol"></textarea>
+    <br>
+    <button type="submit" class="btn btn-default">댓글 달기</button>
+</form>
+
+<% @post.comments.each do |c| %>
+  <div class="thumbnail" style='white-space: pre; margin-bottom:5px;'>
+      
+      <%= c.body %>
+      <% if c.updatable_by? current_user %>
+      <a href="/posts/<%= @post.id %>/reply_edit/<%=c.id%>">수정</a> <a href="/posts/<%= @post.id %>/reply_destroy/<%=c.id%>">삭제</a>  <%= time_ago_in_words(c.created_at) %> ago 
+      <% end %>
+      <form action='/posts/reply_create' method='post' style='margin-top:1px;'>
+        <input type='hidden' value='<%=c.parent.id%>' name='id_of_parent'>
+        <textarea class="form-control" rows="1" id='content' name="reply_reply"></textarea>
+        <br>
+        <button type="submit" class="btn btn-default">댓글 달기</button>
+      </form>
+      <%= render c.replies if c.replies.any? %>
+      
+  </div>
+<% end %>
